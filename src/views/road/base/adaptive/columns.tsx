@@ -3,9 +3,9 @@ import type {
   AdaptiveConfig,
   PaginationProps
 } from "@pureadmin/table";
-import { tableData } from "../data";
 import { ref, onMounted, reactive } from "vue";
 import { clone, delay } from "@pureadmin/utils";
+import { getRoads } from "@/api/road";
 
 export function useColumns() {
   const dataList = ref([]);
@@ -33,11 +33,11 @@ export function useColumns() {
     },
     {
       label: "路面材质",
-      prop: "surface_material"
+      prop: "surfaceMaterial"
     },
     {
       label: "建成年份",
-      prop: "construction_year"
+      prop: "constructionYear"
     }
   ];
 
@@ -95,17 +95,27 @@ export function useColumns() {
   }
 
   onMounted(() => {
-    delay(600).then(() => {
-      const newList = [];
-      Array.from({ length: 6 }).forEach(() => {
-        newList.push(clone(tableData, true));
+    loading.value = true;
+    getRoads()
+      .then(response => {
+        const roads = response;
+        dataList.value = roads.map((road, index) => ({
+          id: index,
+          name: road.name,
+          latitude: road.latitude,
+          longitude: road.longitude,
+          length: road.length,
+          type: road.type,
+          surfaceMaterial: road.surface_material,
+          constructionYear: road.construction_year
+        }));
+        pagination.total = dataList.value.length;
+        loading.value = false;
+      })
+      .catch(error => {
+        console.error("Failed to load roads:", error);
+        loading.value = false;
       });
-      newList.flat(Infinity).forEach((item, index) => {
-        dataList.value.push({ id: index, ...item });
-      });
-      pagination.total = dataList.value.length;
-      loading.value = false;
-    });
   });
 
   return {

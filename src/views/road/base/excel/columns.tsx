@@ -1,11 +1,10 @@
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { utils, writeFile } from "xlsx";
-import { tableDataDrag } from "../data";
-import { clone } from "@pureadmin/utils";
 import { message } from "@/utils/message";
+import { getRoads } from "@/api/road";
 
 export function useColumns() {
-  const dataList = ref(clone(tableDataDrag, true));
+  const dataList = ref([]);
 
   const columns: TableColumnList = [
     {
@@ -30,13 +29,35 @@ export function useColumns() {
     },
     {
       label: "路面材质",
-      prop: "surface_material"
+      prop: "surfaceMaterial"
     },
     {
       label: "建成年份",
-      prop: "construction_year"
+      prop: "constructionYear"
     }
   ];
+
+  onMounted(() => {
+    getRoads()
+      .then(response => {
+        dataList.value = response.map((road, index) => ({
+          id: index,
+          name: road.name,
+          latitude: road.latitude,
+          longitude: road.longitude,
+          length: road.length,
+          type: road.type,
+          surfaceMaterial: road.surface_material,
+          constructionYear: road.construction_year
+        }));
+      })
+      .catch(error => {
+        console.error("Failed to load roads:", error);
+        message("数据加载失败", {
+          type: "error"
+        });
+      });
+  });
 
   const exportExcel = () => {
     const res = dataList.value.map(item => {
