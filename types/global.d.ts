@@ -104,6 +104,7 @@ declare global {
     ShowModel?: string;
     MenuArrowIconNoTransition?: boolean;
     CachingAsyncRoutes?: boolean;
+    AsyncRoutes?: boolean;
     TooltipEffect?: Effect;
     ResponsiveStorageNameSpace?: string;
     MenuSearchHistory?: number;

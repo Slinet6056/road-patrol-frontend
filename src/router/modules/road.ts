@@ -12,7 +12,8 @@ export default {
       name: "ViewRoad",
       component: () => import("@/views/road/index.vue"),
       meta: {
-        title: "道路查看"
+        title: "道路查看",
+        roles: ["common", "admin"]
       }
     },
     {
@@ -20,7 +21,8 @@ export default {
       name: "EditRoad",
       component: () => import("@/views/road/edit.vue"),
       meta: {
-        title: "道路编辑"
+        title: "道路编辑",
+        roles: ["admin"]
       }
     }
   ]
