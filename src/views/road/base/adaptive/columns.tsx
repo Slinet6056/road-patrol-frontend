@@ -102,6 +102,7 @@ export function useColumns() {
         const roads = response;
         dataList.value = roads.map((road, index) => ({
           id: index,
+          roadId: road.id,
           name: road.name,
           latitude: road.latitude,
           longitude: road.longitude,
