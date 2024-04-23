@@ -4,8 +4,9 @@ import type {
   PaginationProps
 } from "@pureadmin/table";
 import { ref, onMounted, reactive } from "vue";
-import { clone, delay } from "@pureadmin/utils";
+import { delay } from "@pureadmin/utils";
 import { getRoads } from "@/api/road";
+import { message } from "@/utils/message";
 
 export function useColumns() {
   const dataList = ref([]);
@@ -115,6 +116,9 @@ export function useColumns() {
       .catch(error => {
         console.error("Failed to load roads:", error);
         loading.value = false;
+        message("数据加载失败", {
+          type: "error"
+        });
       });
   });
 

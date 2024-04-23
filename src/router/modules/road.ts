@@ -13,7 +13,7 @@ export default {
       component: () => import("@/views/road/index.vue"),
       meta: {
         title: "道路查看",
-        roles: ["common", "admin"]
+        roles: ["inspector", "admin"]
       }
     },
     {
