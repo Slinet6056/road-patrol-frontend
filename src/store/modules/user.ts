@@ -5,7 +5,7 @@ import { routerArrays } from "@/layout/types";
 import { router, resetRouter } from "@/router";
 import { storageLocal } from "@pureadmin/utils";
 import { getLogin, refreshTokenApi } from "@/api/user";
-import type { UserResult, RefreshTokenResult } from "@/api/user";
+import type { LoginResult, RefreshTokenResult } from "@/api/user";
 import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
 import { type DataInfo, setToken, removeToken, userKey } from "@/utils/auth";
 
@@ -40,7 +40,7 @@ export const useUserStore = defineStore({
     },
     /** 登入 */
     async loginByUsername(data) {
-      return new Promise<UserResult>((resolve, reject) => {
+      return new Promise<LoginResult>((resolve, reject) => {
         getLogin(data)
           .then(data => {
             if (data) {

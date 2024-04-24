@@ -1,7 +1,7 @@
 import { http } from "@/utils/http";
 import { baseUrlApi } from "./utils";
 
-export type UserResult = {
+export type LoginResult = {
   success: boolean;
   message: string;
   data: {
@@ -31,9 +31,16 @@ export type RefreshTokenResult = {
   };
 };
 
+type User = {
+  id: number;
+  username: string;
+  password: string;
+  role: string;
+};
+
 /** 登录 */
 export const getLogin = (data: object) => {
-  return http.request<UserResult>("post", baseUrlApi("login"), { data });
+  return http.request<LoginResult>("post", baseUrlApi("login"), { data });
 };
 
 /** 刷新token */
@@ -41,4 +48,20 @@ export const refreshTokenApi = (data: object) => {
   return http.request<RefreshTokenResult>("post", baseUrlApi("refresh-token"), {
     data
   });
+};
+
+export const getUsers = () => {
+  return http.request<Array<User>>("get", baseUrlApi("users"));
+};
+
+export const addUser = (data: object) => {
+  return http.request("post", baseUrlApi("user"), { data });
+};
+
+export const updateUser = (id: number, data: object) => {
+  return http.request("put", baseUrlApi(`user/${id}`), { data });
+};
+
+export const deleteUser = (id: number) => {
+  return http.request("delete", baseUrlApi(`user/${id}`));
 };
