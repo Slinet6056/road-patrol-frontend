@@ -43,7 +43,7 @@ export function useColumns() {
       label: "名称",
       prop: "name",
       cellRenderer: ({ row }) => (
-        <el-input v-model={row.name} onBlur={() => onChange(row)} />
+        <el-input v-model={row.name} clearable onBlur={() => onChange(row)} />
       )
     },
     {
@@ -89,14 +89,18 @@ export function useColumns() {
       label: "类型",
       prop: "type",
       cellRenderer: ({ row }) => (
-        <el-input v-model={row.type} onBlur={() => onChange(row)} />
+        <el-input v-model={row.type} clearable onBlur={() => onChange(row)} />
       )
     },
     {
       label: "路面材质",
       prop: "surfaceMaterial",
       cellRenderer: ({ row }) => (
-        <el-input v-model={row.surfaceMaterial} onBlur={() => onChange(row)} />
+        <el-input
+          v-model={row.surfaceMaterial}
+          clearable
+          onBlur={() => onChange(row)}
+        />
       )
     },
     {

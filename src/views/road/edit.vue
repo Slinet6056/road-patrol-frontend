@@ -16,7 +16,7 @@ function tabClick({ index }) {
   <el-card shadow="never">
     <template #header>
       <div class="card-header">
-        <span class="font-medium"> 查看系统中记录的道路信息 </span>
+        <span class="font-medium"> 编辑系统中记录的道路信息 </span>
       </div>
     </template>
 
