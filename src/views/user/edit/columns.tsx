@@ -65,7 +65,8 @@ export function useColumns() {
         <el-input
           v-model={row.username}
           clearable
-          onBlur={() => onChange(row)}
+          onFocus={() => onFocus(row)}
+          onChange={() => onChange(row)}
         />
       )
     },
@@ -77,7 +78,8 @@ export function useColumns() {
           v-model={row.password}
           clearable
           show-password
-          onBlur={() => onChange(row)}
+          onFocus={() => onFocus(row)}
+          onChange={() => onChange(row)}
         />
       )
     },
@@ -89,6 +91,7 @@ export function useColumns() {
           v-model={row.role}
           clearable
           placeholder="请选择角色"
+          onFocus={() => onFocus(row)}
           onChange={() => onChange(row)}
         >
           {roles.map(item => {
@@ -145,71 +148,73 @@ export function useColumns() {
     });
   }
 
+  function onFocus(row) {
+    if (row.originalData === null) row.originalData = { ...row };
+  }
+
   function onChange(row) {
     row.isEdited = true;
-    row.originalData = { ...row };
   }
 
   function onSave(row) {
-    if (!row.username) {
-      message("用户名不能为空", { type: "error" });
-      return;
-    }
-    if (!REGEXP_PWD.test(row.password)) {
-      message("密码格式应为8-18位数字、字母、符号的任意两种组合", {
-        type: "error"
-      });
-      return;
-    }
-
-    const duplicate = dataList.value.some(
-      item => item.username === row.username && item.id !== row.id
-    );
-    if (duplicate) {
-      message("用户名已存在", { type: "error" });
-      return;
-    }
-
-    if (row.userID) {
-      updateUser(row.userID, {
-        username: row.username,
-        password: row.password,
-        role: row.role
-      })
-        .then(() => {
-          row.isEdited = false;
-          row.originalData = null;
-          message("修改成功", {
-            type: "success"
-          });
-        })
-        .catch(error => {
-          console.error("Failed to update user:", error);
-          message("修改失败", {
-            type: "error"
-          });
+    getUsers().then(response => {
+      const users = response.map(user => user.username);
+      if (users.includes(row.username) && !row.userID) {
+        message("用户名已存在", { type: "error" });
+        return;
+      }
+      if (!row.username) {
+        message("用户名不能为空", { type: "error" });
+        return;
+      }
+      if (!REGEXP_PWD.test(row.password)) {
+        message("密码格式应为8-18位数字、字母、符号的任意两种组合", {
+          type: "error"
         });
-    } else {
-      addUser({
-        username: row.username,
-        password: row.password,
-        role: row.role
-      })
-        .then((response: { id: number }) => {
-          row.userID = response.id;
-          row.isEdited = false;
-          row.originalData = null;
-          message("添加成功", {
-            type: "success"
-          });
+        return;
+      }
+
+      if (row.userID) {
+        updateUser(row.userID, {
+          username: row.username,
+          password: row.password,
+          role: row.role
         })
-        .catch(error => {
-          console.error("Failed to add user:", error);
-          message("添加失败", {
-            type: "error"
+          .then(() => {
+            row.isEdited = false;
+            row.originalData = null;
+            message("修改成功", {
+              type: "success"
+            });
+          })
+          .catch(error => {
+            console.error("Failed to update user:", error);
+            message("修改失败", {
+              type: "error"
+            });
           });
-        });
-    }
+      } else {
+        addUser({
+          username: row.username,
+          password: row.password,
+          role: row.role
+        })
+          .then((response: { id: number }) => {
+            row.userID = response.id;
+            row.isEdited = false;
+            row.originalData = null;
+            message("添加成功", {
+              type: "success"
+            });
+          })
+          .catch(error => {
+            console.error("Failed to add user:", error);
+            message("添加失败", {
+              type: "error"
+            });
+          });
+      }
+    });
   }
 
   function onCancel(row) {
