@@ -62,6 +62,9 @@ importers:
       pinyin-pro:
         specifier: ^3.19.6
         version: 3.19.6
+      plus-pro-components:
+        specifier: ^0.1.0
+        version: 0.1.0(element-plus@2.6.2(vue@3.4.21(typescript@5.4.3)))(vue@3.4.21(typescript@5.4.3))
       qs:
         specifier: ^6.12.0
         version: 6.12.0
@@ -2739,6 +2742,12 @@ packages:
 
   pkg-types@1.0.3:
     resolution: {integrity: sha512-nN7pYi0AQqJnoLPC9eHFQ8AcyaixBUOwvqc5TDnIKCMEE6I0y8P7OKA7fPexsXGCGxQDl/cmrLAp26LhcwxZ4A==}
+
+  plus-pro-components@0.1.0:
+    resolution: {integrity: sha512-EuTscI+MwoC6PZkIamuOcjDl6dyzrnpLmwMip2Gio1ajYbxoF+QI9H8slGk05oRAJjSYaHHzqjusGGmXXVWrSA==}
+    peerDependencies:
+      element-plus: ^2.3.4
+      vue: ^3.2.0
 
   popmotion@11.0.5:
     resolution: {integrity: sha512-la8gPM1WYeFznb/JqF4GiTkRRPZsfaj2+kCxqQgr2MJylMmIKUwBfWW8Wa5fml/8gmtlD5yI01MP1QCZPWmppA==}
@@ -6457,6 +6466,14 @@ snapshots:
       mlly: 1.6.1
       pathe: 1.1.2
     optional: true
+
+  plus-pro-components@0.1.0(element-plus@2.6.2(vue@3.4.21(typescript@5.4.3)))(vue@3.4.21(typescript@5.4.3)):
+    dependencies:
+      '@element-plus/icons-vue': 2.3.1(vue@3.4.21(typescript@5.4.3))
+      element-plus: 2.6.2(vue@3.4.21(typescript@5.4.3))
+      lodash-es: 4.17.21
+      sortablejs: 1.15.2
+      vue: 3.4.21(typescript@5.4.3)
 
   popmotion@11.0.5:
     dependencies:

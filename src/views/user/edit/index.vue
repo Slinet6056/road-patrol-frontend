@@ -5,7 +5,7 @@ import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 import AddFill from "@iconify-icons/ep/plus";
 // import Delete from "@iconify-icons/ep/delete";
 
-const { columns, filterTableData, onAdd, onDel } = useColumns();
+const { columns, filterTableData, onAdd } = useColumns();
 </script>
 
 <template>

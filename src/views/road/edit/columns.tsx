@@ -43,7 +43,7 @@ export function useColumns() {
       label: "名称",
       prop: "name",
       cellRenderer: ({ row }) => (
-        <el-input v-model={row.name} clearable onBlur={() => onChange(row)} />
+        <el-input v-model={row.name} clearable onChange={() => onChange(row)} />
       )
     },
     {
@@ -55,7 +55,7 @@ export function useColumns() {
           controls-position="right"
           step={0.0001}
           precision={4}
-          onBlur={() => onChange(row)}
+          onChange={() => onChange(row)}
         />
       )
     },
@@ -68,7 +68,7 @@ export function useColumns() {
           controls-position="right"
           step={0.0001}
           precision={4}
-          onBlur={() => onChange(row)}
+          onChange={() => onChange(row)}
         />
       )
     },
@@ -81,7 +81,7 @@ export function useColumns() {
           controls-position="right"
           step={0.001}
           precision={3}
-          onBlur={() => onChange(row)}
+          onChange={() => onChange(row)}
         />
       )
     },
@@ -89,7 +89,7 @@ export function useColumns() {
       label: "类型",
       prop: "type",
       cellRenderer: ({ row }) => (
-        <el-input v-model={row.type} clearable onBlur={() => onChange(row)} />
+        <el-input v-model={row.type} clearable onChange={() => onChange(row)} />
       )
     },
     {
@@ -99,7 +99,7 @@ export function useColumns() {
         <el-input
           v-model={row.surfaceMaterial}
           clearable
-          onBlur={() => onChange(row)}
+          onChange={() => onChange(row)}
         />
       )
     },
@@ -112,7 +112,7 @@ export function useColumns() {
           controls-position="right"
           step={1}
           precision={0}
-          onBlur={() => onChange(row)}
+          onChange={() => onChange(row)}
         />
       )
     },

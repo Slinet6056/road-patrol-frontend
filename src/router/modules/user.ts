@@ -4,7 +4,7 @@ export default {
   meta: {
     icon: "icon-park-outline:user",
     title: "用户管理",
-    rank: 1
+    rank: 4
   },
   children: [
     {

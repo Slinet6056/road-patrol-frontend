@@ -66,6 +66,7 @@
     "path": "^0.12.7",
     "pinia": "^2.1.7",
     "pinyin-pro": "^3.19.6",
+    "plus-pro-components": "^0.1.0",
     "qs": "^6.12.0",
     "responsive-storage": "^2.2.0",
     "sortablejs": "^1.15.2",
@@ -137,7 +138,7 @@
     "node": "^18.18.0 || ^20.9.0 || >=21.1.0",
     "pnpm": ">=8.6.10"
   },
-  "packageManager": "pnpm@9.0.1",
+  "packageManager": "pnpm@9.0.6",
   "pnpm": {
     "allowedDeprecatedVersions": {
       "sourcemap-codec": "*",
