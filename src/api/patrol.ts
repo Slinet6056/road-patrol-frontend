@@ -9,11 +9,12 @@ export type Plan = {
   status: string;
 };
 
-type Report = {
+export type Report = {
   id: number;
   plan_id: number;
   content: string;
-  create_time: string;
+  created_at: string;
+  updated_at: string;
 };
 
 export const getPlans = () => {

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { list } from "./plan/list";
+import { list } from "./report/list";
 defineOptions({
-  name: "PatrolPlan"
+  name: "PatrolReport"
 });
 
 const selected = ref(0);
@@ -16,7 +16,7 @@ function tabClick({ index }) {
   <el-card shadow="never">
     <template #header>
       <div class="card-header">
-        <span class="font-medium"> 巡检计划管理 </span>
+        <span class="font-medium"> 巡检报告管理 </span>
       </div>
     </template>
 
