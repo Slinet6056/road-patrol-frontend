@@ -16,7 +16,7 @@ import Empty from "./empty.svg?component";
 const state = ref({
   road_id: [],
   inspector_id: null,
-  date: [],
+  date: null,
   status: ""
 });
 
@@ -38,7 +38,7 @@ const statusOptions = ref([
 const roadOptions = ref([]);
 const inspectorOptions = ref([]);
 const formVisible = ref(false);
-const formValues = ref<FieldValues>({});
+const formValues = ref({});
 const dataList = ref([]);
 const allPlans = ref([]);
 const roadMap = ref(new Map());
@@ -139,9 +139,9 @@ const filteredPlans = computed(() => {
     const inspectorMatch =
       !selectedInspectorName || selectedInspectorName === plan.inspector_id;
     const dateMatch =
-      state.value.date.length === 0 ||
-      (new Date(plan.date) >= state.value.date[0] &&
-        new Date(plan.date) <= state.value.date[1]);
+      !state.value.date ||
+      new Date(plan.date).toLocaleDateString() ===
+        state.value.date.toLocaleDateString();
     const statusMatch =
       state.value.status === "" || state.value.status === plan.status;
     return roadMatch && inspectorMatch && dateMatch && statusMatch;
@@ -152,7 +152,7 @@ const handleChange = (values: any) => {
   console.log(values, "change");
 };
 
-const handleSearch = (values: any) => {
+const handleSearch = () => {
   dataList.value = filteredPlans.value;
 };
 
@@ -160,7 +160,7 @@ const handleRest = () => {
   state.value = {
     road_id: [],
     inspector_id: null,
-    date: [],
+    date: null,
     status: ""
   };
   dataList.value = allPlans.value;
@@ -193,7 +193,7 @@ const onDelete = (row: Plan) => {
   });
 };
 
-const onFormSubmit = async (values: FieldValues) => {
+const onFormSubmit = async values => {
   const road_ids = values.road_id.map(name => {
     for (const [id, roadName] of roadMap.value.entries()) {
       if (roadName === name) {
@@ -211,7 +211,7 @@ const onFormSubmit = async (values: FieldValues) => {
     }
   }
 
-  const plan: Plan = {
+  const plan = {
     road_ids,
     inspector_id,
     date: formatDate(values.date),
@@ -234,7 +234,7 @@ const onFormSubmit = async (values: FieldValues) => {
       const newPlan = await addPlan(plan);
       message("添加成功", { type: "success" });
       allPlans.value.push({
-        id: newPlan.id,
+        id: (newPlan as Plan).id,
         ...plan,
         road_id: plan.road_ids.map(id => roadMap.value.get(id) || id),
         inspector_id:
@@ -306,7 +306,7 @@ const locale = { ...zhCn, ...plusZhCn };
     <PlusDialogForm
       v-model:visible="formVisible"
       v-model="formValues"
-      :form="{ columns: formColumns }"
+      :form="{ columns: formColumns as PlusColumn[] }"
       @confirm="onFormSubmit"
     />
   </el-config-provider>
