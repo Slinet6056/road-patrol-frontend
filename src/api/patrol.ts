@@ -1,6 +1,8 @@
 import { http } from "@/utils/http";
 import { baseUrlApi } from "./utils";
 
+const { VITE_TENANT_ID } = import.meta.env;
+
 export type Plan = {
   id: number;
   road_ids: Array<number>;
@@ -18,33 +20,49 @@ export type Report = {
 };
 
 export const getPlans = () => {
-  return http.request<Array<Plan>>("get", baseUrlApi("plans"));
+  return http.request<Array<Plan>>("get", baseUrlApi("plans"), {
+    params: { tenant_id: VITE_TENANT_ID }
+  });
 };
 
 export const addPlan = (data: object) => {
-  return http.request("post", baseUrlApi("plan"), { data });
+  return http.request("post", baseUrlApi("plan"), {
+    data: { ...data, tenant_id: VITE_TENANT_ID }
+  });
 };
 
 export const updatePlan = (id: number, data: object) => {
-  return http.request("put", baseUrlApi(`plan/${id}`), { data });
+  return http.request("put", baseUrlApi(`plan/${id}`), {
+    data: { ...data, tenant_id: VITE_TENANT_ID }
+  });
 };
 
 export const deletePlan = (id: number) => {
-  return http.request("delete", baseUrlApi(`plan/${id}`));
+  return http.request("delete", baseUrlApi(`plan/${id}`), {
+    params: { tenant_id: VITE_TENANT_ID }
+  });
 };
 
 export const getReports = () => {
-  return http.request<Array<Report>>("get", baseUrlApi("reports"));
+  return http.request<Array<Report>>("get", baseUrlApi("reports"), {
+    params: { tenant_id: VITE_TENANT_ID }
+  });
 };
 
 export const addReport = (data: object) => {
-  return http.request("post", baseUrlApi("report"), { data });
+  return http.request("post", baseUrlApi("report"), {
+    data: { ...data, tenant_id: VITE_TENANT_ID }
+  });
 };
 
 export const updateReport = (id: number, data: object) => {
-  return http.request("put", baseUrlApi(`report/${id}`), { data });
+  return http.request("put", baseUrlApi(`report/${id}`), {
+    data: { ...data, tenant_id: VITE_TENANT_ID }
+  });
 };
 
 export const deleteReport = (id: number) => {
-  return http.request("delete", baseUrlApi(`report/${id}`));
+  return http.request("delete", baseUrlApi(`report/${id}`), {
+    params: { tenant_id: VITE_TENANT_ID }
+  });
 };

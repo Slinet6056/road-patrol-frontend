@@ -1,6 +1,8 @@
 import { http } from "@/utils/http";
 import { baseUrlApi } from "./utils";
 
+const { VITE_TENANT_ID } = import.meta.env;
+
 export type LoginResult = {
   success: boolean;
   message: string;
@@ -33,6 +35,7 @@ export type RefreshTokenResult = {
 
 type User = {
   id: number;
+  tenant_id: number;
   username: string;
   password: string;
   role: string;
@@ -40,28 +43,38 @@ type User = {
 
 /** 登录 */
 export const getLogin = (data: object) => {
-  return http.request<LoginResult>("post", baseUrlApi("login"), { data });
+  return http.request<LoginResult>("post", baseUrlApi("login"), {
+    data: { ...data, tenant_id: VITE_TENANT_ID }
+  });
 };
 
 /** 刷新token */
 export const refreshTokenApi = (data: object) => {
   return http.request<RefreshTokenResult>("post", baseUrlApi("refresh-token"), {
-    data
+    data: { ...data, tenant_id: VITE_TENANT_ID }
   });
 };
 
 export const getUsers = () => {
-  return http.request<Array<User>>("get", baseUrlApi("users"));
+  return http.request<Array<User>>("get", baseUrlApi("users"), {
+    params: { tenant_id: VITE_TENANT_ID }
+  });
 };
 
 export const addUser = (data: object) => {
-  return http.request("post", baseUrlApi("user"), { data });
+  return http.request("post", baseUrlApi("user"), {
+    data: { ...data, tenant_id: VITE_TENANT_ID }
+  });
 };
 
 export const updateUser = (id: number, data: object) => {
-  return http.request("put", baseUrlApi(`user/${id}`), { data });
+  return http.request("put", baseUrlApi(`user/${id}`), {
+    data: { ...data, tenant_id: VITE_TENANT_ID }
+  });
 };
 
 export const deleteUser = (id: number) => {
-  return http.request("delete", baseUrlApi(`user/${id}`));
+  return http.request("delete", baseUrlApi(`user/${id}`), {
+    params: { tenant_id: VITE_TENANT_ID }
+  });
 };

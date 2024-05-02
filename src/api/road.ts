@@ -1,6 +1,8 @@
 import { http } from "@/utils/http";
 import { baseUrlApi } from "./utils";
 
+const { VITE_TENANT_ID } = import.meta.env;
+
 type Road = {
   id: number;
   name: string;
@@ -13,17 +15,25 @@ type Road = {
 };
 
 export const getRoads = () => {
-  return http.request<Array<Road>>("get", baseUrlApi("roads"));
+  return http.request<Array<Road>>("get", baseUrlApi("roads"), {
+    params: { tenant_id: VITE_TENANT_ID }
+  });
 };
 
 export const addRoad = (data: object) => {
-  return http.request("post", baseUrlApi("road"), { data });
+  return http.request("post", baseUrlApi("road"), {
+    data: { ...data, tenant_id: VITE_TENANT_ID }
+  });
 };
 
 export const updateRoad = (id: number, data: object) => {
-  return http.request("put", baseUrlApi(`road/${id}`), { data });
+  return http.request("put", baseUrlApi(`road/${id}`), {
+    data: { ...data, tenant_id: VITE_TENANT_ID }
+  });
 };
 
 export const deleteRoad = (id: number) => {
-  return http.request("delete", baseUrlApi(`road/${id}`));
+  return http.request("delete", baseUrlApi(`road/${id}`), {
+    params: { tenant_id: VITE_TENANT_ID }
+  });
 };
