@@ -1,6 +1,6 @@
 {
-  "name": "pure-admin-thin",
-  "version": "5.3.0",
+  "name": "road-patrol-frontend",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -23,29 +23,27 @@
     "preinstall": "npx only-allow pnpm"
   },
   "keywords": [
-    "vue-pure-admin",
     "element-plus",
     "tailwindcss",
-    "pure-admin",
     "typescript",
     "pinia",
     "vue3",
     "vite",
     "esm"
   ],
-  "homepage": "https://github.com/pure-admin/pure-admin-thin",
+  "homepage": "https://github.com/Slinet6056/road-patrol-frontend",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pure-admin/pure-admin-thin.git"
+    "url": "git+https://github.com/Slinet6056/road-patrol-frontend.git"
   },
   "bugs": {
-    "url": "https://github.com/pure-admin/pure-admin-thin/issues"
+    "url": "https://github.com/Slinet6056/road-patrol-frontend/issues"
   },
   "license": "MIT",
   "author": {
-    "name": "xiaoxian521",
-    "email": "pureadmin@163.com",
-    "url": "https://github.com/xiaoxian521"
+    "name": "Slinet6056",
+    "email": "inbox@slinet.me",
+    "url": "https://github.com/Slinet6056"
   },
   "dependencies": {
     "@howdyjs/mouse-menu": "^2.1.3",
