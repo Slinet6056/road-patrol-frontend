@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path(.*)",
+      "destination": "https://rp-api.slinet.me/:path"
+    },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
