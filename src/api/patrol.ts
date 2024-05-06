@@ -27,13 +27,15 @@ export const getPlans = () => {
 
 export const addPlan = (data: object) => {
   return http.request("post", baseUrlApi("plan"), {
-    data: { ...data, tenant_id: VITE_TENANT_ID }
+    params: { tenant_id: VITE_TENANT_ID },
+    data
   });
 };
 
 export const updatePlan = (id: number, data: object) => {
   return http.request("put", baseUrlApi(`plan/${id}`), {
-    data: { ...data, tenant_id: VITE_TENANT_ID }
+    params: { tenant_id: VITE_TENANT_ID },
+    data
   });
 };
 
@@ -51,13 +53,15 @@ export const getReports = () => {
 
 export const addReport = (data: object) => {
   return http.request("post", baseUrlApi("report"), {
-    data: { ...data, tenant_id: VITE_TENANT_ID }
+    params: { tenant_id: VITE_TENANT_ID },
+    data
   });
 };
 
 export const updateReport = (id: number, data: object) => {
   return http.request("put", baseUrlApi(`report/${id}`), {
-    data: { ...data, tenant_id: VITE_TENANT_ID }
+    params: { tenant_id: VITE_TENANT_ID },
+    data
   });
 };
 

@@ -44,14 +44,16 @@ type User = {
 /** 登录 */
 export const getLogin = (data: object) => {
   return http.request<LoginResult>("post", baseUrlApi("login"), {
-    data: { ...data, tenant_id: VITE_TENANT_ID }
+    params: { tenant_id: VITE_TENANT_ID },
+    data
   });
 };
 
 /** 刷新token */
 export const refreshTokenApi = (data: object) => {
   return http.request<RefreshTokenResult>("post", baseUrlApi("refresh-token"), {
-    data: { ...data, tenant_id: VITE_TENANT_ID }
+    params: { tenant_id: VITE_TENANT_ID },
+    data
   });
 };
 
@@ -63,13 +65,15 @@ export const getUsers = () => {
 
 export const addUser = (data: object) => {
   return http.request("post", baseUrlApi("user"), {
-    data: { ...data, tenant_id: VITE_TENANT_ID }
+    params: { tenant_id: VITE_TENANT_ID },
+    data
   });
 };
 
 export const updateUser = (id: number, data: object) => {
   return http.request("put", baseUrlApi(`user/${id}`), {
-    data: { ...data, tenant_id: VITE_TENANT_ID }
+    params: { tenant_id: VITE_TENANT_ID },
+    data
   });
 };
 

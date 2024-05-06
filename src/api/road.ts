@@ -22,13 +22,15 @@ export const getRoads = () => {
 
 export const addRoad = (data: object) => {
   return http.request("post", baseUrlApi("road"), {
-    data: { ...data, tenant_id: VITE_TENANT_ID }
+    params: { tenant_id: VITE_TENANT_ID },
+    data
   });
 };
 
 export const updateRoad = (id: number, data: object) => {
   return http.request("put", baseUrlApi(`road/${id}`), {
-    data: { ...data, tenant_id: VITE_TENANT_ID }
+    params: { tenant_id: VITE_TENANT_ID },
+    data
   });
 };
 
