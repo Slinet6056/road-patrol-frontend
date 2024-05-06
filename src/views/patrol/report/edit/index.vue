@@ -242,7 +242,10 @@ const onReportSubmit = async (values: any) => {
         plan_id: currentPlan.value!.id,
         ...values
       });
-      await updatePlan(currentPlan.value!.id, { status: values.status });
+      await updatePlan(currentPlan.value!.id, {
+        road_ids: currentPlan.value.road_ids,
+        status: values.status
+      });
       message("添加成功", { type: "success" });
       reportMap.value.set(currentPlan.value!.id, newReport as Report);
     }
